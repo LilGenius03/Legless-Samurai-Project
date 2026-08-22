@@ -1,3 +1,24 @@
 [gd_scene format=3 uid="uid://cgd35mlmt1jjw"]
 
+[ext_resource type="PackedScene" uid="uid://cp5clkf5qshuu" path="res://Assets/ProtoType_Test_Assets/Legless Samurai_Test_Model.glb" id="1_on5w7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1s358"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_on5w7"]
+size = Vector3(1, 1.0006104, 1)
+
 [node name="Legless Samuari Mechanics_Test" type="Node3D" unique_id=513799604]
+
+[node name="Ground_Test" type="MeshInstance3D" parent="." unique_id=1064597318]
+transform = Transform3D(3.2308648, 0, 0, 0, 1, 0, 0, 0, 3.8130116, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_1s358")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Ground_Test" unique_id=923872467]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24958205, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground_Test/StaticBody3D" unique_id=1760365804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2498169, 0)
+shape = SubResource("BoxShape3D_on5w7")
+
+[node name="Legless Samurai_Test_Model" parent="." unique_id=1241257609 instance=ExtResource("1_on5w7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21527815, 0.12199242, 0.31751966)
