@@ -103,3 +103,4 @@ mesh = SubResource("ArrayMesh_lrl2j")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1704132273]
 transform = Transform3D(0.999997, -1.4901161e-08, -2.9802322e-08, 1.244247e-06, 1, 0, -1.5869737e-06, -2.9802322e-08, 0.9999999, -4.229696e-08, 0.71594226, -0.009717403)
 shape = SubResource("CylinderShape3D_otlyy")
+debug_color = Color(0.8352941, 0.4745098, 0, 0.78039217)
