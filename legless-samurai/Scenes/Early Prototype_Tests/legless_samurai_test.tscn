@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://b1tcmk5q651rd" path="res://Scenes/Early Prototype_Tests/Sword_Test.tscn" id="1_2ph7n"]
 [ext_resource type="Script" uid="uid://ch684cujk0plr" path="res://Scripts/Character_Gameplay/Character_Movement.gd" id="1_601p8"]
-[ext_resource type="Animation" uid="uid://btllspvriqr2r" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Aiming_Right_Animation_Test.anim" id="1_ybi1u"]
-[ext_resource type="Animation" uid="uid://coehjpjxuigx3" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Blocking_Right_Animation_Test.anim" id="2_2ph7n"]
-[ext_resource type="Animation" uid="uid://db2x01j1oob7a" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Idle_Animation_Test.anim" id="3_601p8"]
-[ext_resource type="Animation" uid="uid://bsocqwfglawhn" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Slicing_Test.anim" id="4_3yx2r"]
-[ext_resource type="Animation" uid="uid://jt0wij5om563" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/stun_Test.anim" id="5_stopx"]
+[ext_resource type="Animation" uid="uid://bk1g5bh7go88p" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Aiming_Right_Animation_Test.anim" id="1_ybi1u"]
+[ext_resource type="Animation" uid="uid://bfbu118w1okm5" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Blocking_Right_Animation_Test.anim" id="2_2ph7n"]
+[ext_resource type="Animation" uid="uid://ooot445m48se" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Idle_Animation_Test.anim" id="3_601p8"]
+[ext_resource type="Animation" uid="uid://gvxiga7vl2im" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Slicing_Test.anim" id="4_3yx2r"]
+[ext_resource type="Animation" uid="uid://ctig8xxfl7vtn" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/stun_Test.anim" id="5_stopx"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqunu"]
 resource_name = "Material.002"
@@ -441,7 +441,7 @@ states/Parry_Flash_Test/position = Vector2(644.70557, 141.67165)
 "states/Stun Animation/node" = SubResource("AnimationNodeAnimation_eyw3n")
 "states/Stun Animation/position" = Vector2(868.03894, 9.348248)
 transitions = ["Start", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_uyxm2"), "Idle Animation Test", "Aiming_Animation_Right", SubResource("AnimationNodeStateMachineTransition_1hvmi"), "Aiming_Animation_Right", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_eyw3n"), "Idle Animation Test", "Blocking Animation_Right ", SubResource("AnimationNodeStateMachineTransition_ybi1u"), "Blocking Animation_Right ", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_2ph7n"), "Aiming_Animation_Right", "Stun Animation", SubResource("AnimationNodeStateMachineTransition_601p8"), "Stun Animation", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_rhihh"), "Aiming_Animation_Right", "Slicing Layer", SubResource("AnimationNodeStateMachineTransition_c27ik"), "Blocking Animation_Right ", "Parry_Flash_Test", SubResource("AnimationNodeStateMachineTransition_gr1db"), "Slicing Layer", "End", SubResource("AnimationNodeStateMachineTransition_b6u1y")]
-graph_offset = Vector2(-28.826843, -15.326811)
+graph_offset = Vector2(150.35776, 10.734659)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ph7n"]
 radius = 0.2607422
@@ -580,6 +580,7 @@ transform = Transform3D(-0.5874647, 0.38513538, -0.71172893, -0.7662441, -0.5476
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888604791]
 libraries/ = SubResource("AnimationLibrary_6vt1y")
+autoplay = &"Idle Animation Test"
 
 [node name="AnimationTree_Legless_Samurai" type="AnimationTree" parent="." unique_id=931430183]
 tree_root = SubResource("AnimationNodeStateMachine_rhihh")

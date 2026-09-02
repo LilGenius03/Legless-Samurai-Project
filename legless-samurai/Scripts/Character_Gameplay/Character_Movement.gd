@@ -1,18 +1,24 @@
 extends CharacterBody3D
-# Different States for LS for animations
+var aim_direction: Vector3 = Vector3.ZERO
+enum State {IDLE, AIMING, BLOCKING, PARRYING, STUNNED}
+var current_state: State = State.IDLE
+
+
 var is_aiming : bool
 var is_blocking: bool
 var is_parry_successful: bool
 var is_stunned: bool
 @onready var aim_raycast: RayCast3D = $Aiming_RayCast
-var aim_direction: Vector3 = Vector3.ZERO
+@onready var animation_tree = $AnimationTree_Legless_Samurai
+@onready var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
-enum State {IDLE, AIMING, BLOCKING, PARRYING, STUNNED}
-var current_state: State = State.IDLE
-
+func _onready():
+	animation_tree.active = true
+	state_machine.travel("Idle Animation Test")
 func _physics_process(delta):
 	
 	if current_state == State.IDLE:
+		state_machine.travel("Idle Animation Test")
 		if Input.is_action_pressed("Aiming"):
 			current_state = State.AIMING
 			_update_aim_raycast()
@@ -28,9 +34,11 @@ func _physics_process(delta):
 		State.AIMING:
 			_handle_aiming(delta)
 	pass
+
 func _handle_idle(_delta):
 	print("idle")
 	pass
+
 func _handle_aiming(_detla):
 	
 	if not aim_raycast:
