@@ -20,6 +20,8 @@ glow_enabled = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_on5w7"]
 size = Vector3(1, 1.0006104, 1)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_kp1a8"]
+
 [node name="Legless Samuari Mechanics_Test" type="Node3D" unique_id=513799604]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=561646846]
@@ -44,3 +46,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2498169, 0)
 shape = SubResource("BoxShape3D_on5w7")
 
 [node name="Legless Samurai_Test" parent="." unique_id=1101289061 instance=ExtResource("1_kp1a8")]
+
+[node name="Plane_Depth_Checker" type="MeshInstance3D" parent="." unique_id=998943435]
+transform = Transform3D(-7.8024826e-08, -1.785, 0, 1.785, -7.8024826e-08, 0, 0, 0, 1.785, 0.99999994, 1.785, 0)
+mesh = SubResource("PlaneMesh_kp1a8")

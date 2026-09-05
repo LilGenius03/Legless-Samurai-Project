@@ -399,7 +399,6 @@ advance_condition = &"is_aiming"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eyw3n"]
 advance_mode = 2
-advance_condition = &"!is_aiming"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybi1u"]
 advance_mode = 2
@@ -441,7 +440,7 @@ states/Parry_Flash_Test/position = Vector2(644.70557, 141.67165)
 "states/Stun Animation/node" = SubResource("AnimationNodeAnimation_eyw3n")
 "states/Stun Animation/position" = Vector2(868.03894, 9.348248)
 transitions = ["Start", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_uyxm2"), "Idle Animation Test", "Aiming_Animation_Right", SubResource("AnimationNodeStateMachineTransition_1hvmi"), "Aiming_Animation_Right", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_eyw3n"), "Idle Animation Test", "Blocking Animation_Right ", SubResource("AnimationNodeStateMachineTransition_ybi1u"), "Blocking Animation_Right ", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_2ph7n"), "Aiming_Animation_Right", "Stun Animation", SubResource("AnimationNodeStateMachineTransition_601p8"), "Stun Animation", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_rhihh"), "Aiming_Animation_Right", "Slicing Layer", SubResource("AnimationNodeStateMachineTransition_c27ik"), "Blocking Animation_Right ", "Parry_Flash_Test", SubResource("AnimationNodeStateMachineTransition_gr1db"), "Slicing Layer", "End", SubResource("AnimationNodeStateMachineTransition_b6u1y")]
-graph_offset = Vector2(150.35776, 10.734659)
+graph_offset = Vector2(197.35776, -27.87426)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ph7n"]
 radius = 0.2607422
@@ -578,6 +577,11 @@ bone_idx = 13
 [node name="Sword_Test" parent="Legless Samurai Test_Armature/Skeleton3D/BoneAttachment3D" unique_id=1047255989 instance=ExtResource("1_2ph7n")]
 transform = Transform3D(-0.5874647, 0.38513538, -0.71172893, -0.7662441, -0.5476205, 0.33613038, -0.26030165, 0.74282163, 0.6168158, 0.021384701, 0.06703904, -0.00903663)
 
+[node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="Legless Samurai Test_Armature/Skeleton3D" unique_id=833251395]
+transform = Transform3D(3.8668546e-07, -0.80717015, 0.59031874, 2.8775366e-07, -0.5903187, -0.8071704, 1, 4.8198723e-07, 3.9985935e-09, -0.9475623, 0.015861914, 5.943824e-07)
+bone_name = "Hand.R"
+bone = 13
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888604791]
 libraries/ = SubResource("AnimationLibrary_6vt1y")
 autoplay = &"Idle Animation Test"
@@ -598,3 +602,8 @@ parameters/conditions/is_stunned = false
 [node name="LS_Collision_Shape" type="CollisionShape3D" parent="." unique_id=2122957744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_2ph7n")
+
+[node name="AimDebugMarker" type="Marker3D" parent="." unique_id=1520460757]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AimDebugMarker" unique_id=339225269]
+radius = 0.08

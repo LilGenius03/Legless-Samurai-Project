@@ -1,65 +1,72 @@
 extends CharacterBody3D
-var aim_direction: Vector3 = Vector3.ZERO
-enum State {IDLE, AIMING, BLOCKING, PARRYING, STUNNED}
+
+enum State {
+IDLE, 
+AIMING, 
+BLOCKING, 
+PARRYING, 
+STUNNED
+}
 var current_state: State = State.IDLE
+var aim_direction: Vector3 = Vector3.ZERO
+var aim_target_position: Vector3 = Vector3.ZERO
 
-
-var is_aiming : bool
-var is_blocking: bool
-var is_parry_successful: bool
-var is_stunned: bool
-@onready var aim_raycast: RayCast3D = $Aiming_RayCast
 @onready var animation_tree = $AnimationTree_Legless_Samurai
 @onready var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 
-func _onready():
+@onready var Bone_Target: ModifierBoneTarget3D = $"Legless Samurai Test_Armature/Skeleton3D/ModifierBoneTarget3D"
+@onready var aim_debug_marker: Marker3D = $AimDebugMarker
+
+func _ready() -> void:
 	animation_tree.active = true
 	state_machine.travel("Idle Animation Test")
-func _physics_process(delta):
-	
-	if current_state == State.IDLE:
-		state_machine.travel("Idle Animation Test")
-		if Input.is_action_pressed("Aiming"):
-			current_state = State.AIMING
-			_update_aim_raycast()
-	
-	elif current_state == State.AIMING:
-		if not Input.is_action_pressed("Aiming"):
-			current_state = State.IDLE
-			aim_direction = Vector3.ZERO
+
+func _physics_process(_delta: float) -> void:
 	
 	match current_state:
 		State.IDLE:
-			_handle_idle(delta)
+			_handle_idle()
+
 		State.AIMING:
-			_handle_aiming(delta)
+			_handle_aiming()
+
+		State.BLOCKING:
+			_handle_blocking()
+
+		State.PARRYING:
+			_handle_parrying()
+
+		State.STUNNED:
+			_handle_stunned()
 	pass
 
-func _handle_idle(_delta):
-	print("idle")
+func _handle_idle() -> void:
+	if Input.is_action_pressed("Aiming"):
+		_enter_aiming()
 	pass
 
-func _handle_aiming(_detla):
-	
-	if not aim_raycast:
-		print("AimRay is Missing!!!!!")
+func _handle_aiming() -> void:
+	if not Input.is_action_pressed("Aiming"):
+		_exit_aiming()
 		return
 	
-	_update_aim_raycast()
-	
-	
-	if aim_raycast.is_colliding():
-		var hit_point = aim_raycast.get_collision_point()
-		aim_direction = (hit_point - global_transform.origin).normalized()
-	
-	else:
-		aim_direction = -global_transform.basis.z.normalized()
+	_update_aim_target()
 	
 	pass
+func _enter_aiming() -> void:
+	current_state = State.AIMING
+	animation_tree.set("parameters/conditions/is_aiming", true)
+
+func _exit_aiming() -> void:
+	current_state = State.IDLE
+	aim_direction = Vector3.ZERO
+	
+	animation_tree.set("parameters/conditions/is_aiming", false)
+
 func _handle_blocking():
-	if Input.is_action_pressed("Blocking") && !is_blocking:
+	if Input.is_action_pressed("Blocking"):
 		print("blocking")
-		is_blocking = true
+	
 
 func _handle_parrying():
 	print("parrying")
@@ -67,29 +74,34 @@ func _handle_parrying():
 func _handle_stunned():
 	print("stunned")
 
-func _update_aim_raycast():
-	if not aim_raycast:
+func _update_aim_target():
+	
+	var camera := get_viewport().get_camera_3d()
+	
+	if camera == null:
 		return
+		
 	
-	var camera = get_viewport().get_camera_3d()
-	var mouse_pos = get_viewport().get_mouse_position()
+	var mouse_position := get_viewport().get_mouse_position()
 	
-	var ray_from = camera.project_ray_origin(mouse_pos)
-	var ray_normal = camera.project_ray_normal(mouse_pos)
+	var ray_origin := camera.project_ray_origin(mouse_position)
+	var ray_direction := camera.project_ray_normal(mouse_position)
 	
-	var player_x = global_position.x
-	
-	if abs(ray_normal.x) < 0.001:
+	if abs(ray_direction.x) < 0.001:
 		return
+
+	var distance := (global_position.x - ray_origin.x) / ray_direction.x
+
+	aim_target_position = ray_origin + ray_direction * distance
 	
-	aim_raycast.global_position = global_position + Vector3(0,1,0)
+	aim_debug_marker.global_position = aim_target_position
 	
-	var distance = (player_x - ray_from.x) / ray_normal.x
-	var target_point = ray_from + (ray_normal * distance)
+	aim_direction = (
+		aim_target_position - global_position
+	).normalized()
+
 	
-	aim_raycast.global_position = global_position + Vector3(0, 1, 0)
-	
-	var direction = target_point - aim_raycast.global_position
-	
-	direction.x = 0 
-	aim_raycast.target_position = direction.normalized() * 10.0
+	Bone_Target.global_position = (
+		global_position
+		+ aim_direction * 2.0
+	)
