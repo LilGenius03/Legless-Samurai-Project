@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c778tcssxtkm3"]
+
+[node name="AimDebugMarker" type="Marker3D" unique_id=2117549194]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=1480697627]
+radius = 0.08
