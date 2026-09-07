@@ -2,11 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b1tcmk5q651rd" path="res://Scenes/Early Prototype_Tests/Sword_Test.tscn" id="1_2ph7n"]
 [ext_resource type="Script" uid="uid://ch684cujk0plr" path="res://Scripts/Character_Gameplay/Character_Movement.gd" id="1_601p8"]
-[ext_resource type="Animation" uid="uid://bk1g5bh7go88p" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Aiming_Right_Animation_Test.anim" id="1_ybi1u"]
-[ext_resource type="Animation" uid="uid://bfbu118w1okm5" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Blocking_Right_Animation_Test.anim" id="2_2ph7n"]
-[ext_resource type="Animation" uid="uid://ooot445m48se" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Idle_Animation_Test.anim" id="3_601p8"]
-[ext_resource type="Animation" uid="uid://gvxiga7vl2im" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Slicing_Test.anim" id="4_3yx2r"]
-[ext_resource type="Animation" uid="uid://ctig8xxfl7vtn" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/stun_Test.anim" id="5_stopx"]
+[ext_resource type="Animation" uid="uid://btllspvriqr2r" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Aiming_Right_Animation_Test.anim" id="1_ybi1u"]
+[ext_resource type="Animation" uid="uid://db2x01j1oob7a" path="res://Assets/ProtoType_Test_Assets/Animation_Tests/Idle_Animation_Test.anim" id="3_601p8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqunu"]
 resource_name = "Material.002"
@@ -205,161 +202,20 @@ bind/13/name = &"Hand.R"
 bind/13/bone = -1
 bind/13/pose = Transform3D(3.42974e-07, 2.877537e-07, 1, -0.80717045, -0.5903187, 4.467049e-07, 0.59031856, -0.80717033, 2.9802253e-08, -2.3253831e-07, -0.7554807, 0.57216704)
 
-[sub_resource type="Animation" id="Animation_m0ky7"]
-resource_name = "Parry_Flash"
-length = 0.25
-tracks/0/type = "position_3d"
-tracks/0/imported = true
-tracks/0/enabled = true
-tracks/0/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Ik Manager Right arm")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, -0.70175374, 0.7811204, 0.4584081, 0.033333335, 1, -0.70175374, 0.7811204, 0.4584081, 0.06666667, 1, -0.7017537, 0.7981623, 0.46137187, 0.1, 1, -0.7017537, 0.83661574, 0.46805942, 0.13333334, 1, -0.70175374, 0.8934219, 0.47793877, 0.16666667, 1, -0.70175374, 0.95809346, 0.489186, 0.2, 1, -0.70175374, 1.0122778, 0.4986093, 0.23333333, 1, -0.70175374, 1.0428658, 0.5039289, 0.25, 1, -0.70175374, 1.054227, 0.5059048)
-tracks/1/type = "rotation_3d"
-tracks/1/imported = true
-tracks/1/enabled = true
-tracks/1/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Ik Manager Right arm")
-tracks/1/interp = 0
-tracks/1/loop_wrap = true
-tracks/1/keys = PackedFloat32Array(0, 1, 0.058322683, 0.5395367, -0.7046974, 0.4570561)
-tracks/2/type = "position_3d"
-tracks/2/imported = true
-tracks/2/enabled = true
-tracks/2/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Arm.L.001")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = PackedFloat32Array(0, 1, -0.59870565, 0.7739973, 0.5320263, 0.033333335, 1, -0.59870565, 0.7739973, 0.5320263, 0.06666667, 1, -0.5987057, 0.7910391, 0.5349901, 0.1, 1, -0.59870577, 0.82949257, 0.54167765, 0.13333334, 1, -0.5987057, 0.8862988, 0.55155694, 0.16666667, 1, -0.5987057, 0.9509704, 0.5628042, 0.2, 1, -0.59870565, 1.0051546, 0.5722276, 0.23333333, 1, -0.59870565, 1.0357425, 0.5775472, 0.25, 1, -0.59870565, 1.0471039, 0.5795231)
-tracks/3/type = "rotation_3d"
-tracks/3/imported = true
-tracks/3/enabled = true
-tracks/3/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Arm.L.001")
-tracks/3/interp = 0
-tracks/3/loop_wrap = true
-tracks/3/keys = PackedFloat32Array(0, 1, 0.45927194, 0.56462985, -0.6841821, 0.04644744)
-tracks/4/type = "position_3d"
-tracks/4/imported = true
-tracks/4/enabled = true
-tracks/4/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Torso")
-tracks/4/interp = 0
-tracks/4/loop_wrap = true
-tracks/4/keys = PackedFloat32Array(0, 1, 2.9419695e-07, 1.8626451e-09, 1.5571585e-07)
-tracks/5/type = "rotation_3d"
-tracks/5/imported = true
-tracks/5/enabled = true
-tracks/5/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Torso")
-tracks/5/interp = 0
-tracks/5/loop_wrap = true
-tracks/5/keys = PackedFloat32Array(0, 1, 0, -0.9541615, 0, 0.2992922)
-tracks/6/type = "rotation_3d"
-tracks/6/imported = true
-tracks/6/enabled = true
-tracks/6/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Upper Torso")
-tracks/6/interp = 0
-tracks/6/loop_wrap = true
-tracks/6/keys = PackedFloat32Array(0, 1, 0.0075181616, 8.0853674e-08, -2.2867727e-10, 0.99997175)
-tracks/7/type = "rotation_3d"
-tracks/7/imported = true
-tracks/7/enabled = true
-tracks/7/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Neck")
-tracks/7/interp = 0
-tracks/7/loop_wrap = true
-tracks/7/keys = PackedFloat32Array(0, 1, -0.015804892, 0.0014129807, 0.0824572, 0.9964683)
-tracks/8/type = "rotation_3d"
-tracks/8/imported = true
-tracks/8/enabled = true
-tracks/8/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Head")
-tracks/8/interp = 0
-tracks/8/loop_wrap = true
-tracks/8/keys = PackedFloat32Array(0, 1, 0.008375876, 8.0498204e-08, -0.07970545, 0.99678326)
-tracks/9/type = "position_3d"
-tracks/9/imported = true
-tracks/9/enabled = true
-tracks/9/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Shoulder.L")
-tracks/9/interp = 0
-tracks/9/loop_wrap = true
-tracks/9/keys = PackedFloat32Array(0, 1, 2.172076e-07, 0.2075341, -0.17645068)
-tracks/10/type = "rotation_3d"
-tracks/10/imported = true
-tracks/10/enabled = true
-tracks/10/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Shoulder.L")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = PackedFloat32Array(0, 1, 0.0028808317, 0.52585745, -0.74238354, 0.41512948, 0.033333335, 1, 0.0028808317, 0.52585745, -0.74238354, 0.41512948, 0.06666667, 1, 0.008147873, 0.5293518, -0.7365612, 0.42094892, 0.1, 1, 0.02110064, 0.53735936, -0.7219429, 0.43542862, 0.13333334, 1, 0.042481218, 0.5491609, -0.69701844, 0.45911124, 0.16666667, 1, 0.07131203, 0.56240934, -0.6619802, 0.4902985, 0.2, 1, 0.104963705, 0.57239175, -0.6212557, 0.5247779, 0.23333333, 1, 0.12769377, 0.576679, -0.593352, 0.5468721, 0.25, 1, 0.13723044, 0.57789093, -0.58157337, 0.55586183)
-tracks/11/type = "rotation_3d"
-tracks/11/imported = true
-tracks/11/enabled = true
-tracks/11/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Upper Arm.L")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = PackedFloat32Array(0, 1, 0.14285289, 0.044955514, 0.39682528, 0.9055947, 0.033333335, 1, 0.14285289, 0.044955514, 0.39682528, 0.9055947, 0.06666667, 1, 0.133675, 0.044917945, 0.39679307, 0.9070109, 0.1, 1, 0.113669, 0.044696864, 0.39451393, 0.91073614, 0.13333334, 1, 0.08541614, 0.04404543, 0.38678846, 0.9171471, 0.16666667, 1, 0.055800572, 0.042637434, 0.3696243, 0.92652375, 0.2, 1, 0.034537643, 0.041145038, 0.34050846, 0.9387057, 0.23333333, 1, 0.023408692, 0.040236168, 0.31800973, 0.946944, 0.25, 1, 0.01953533, 0.03987872, 0.3078639, 0.95039356)
-tracks/12/type = "rotation_3d"
-tracks/12/imported = true
-tracks/12/enabled = true
-tracks/12/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Arm.L")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = PackedFloat32Array(0, 1, 0.06819459, 0.015746519, 0.342091, 0.9370568, 0.033333335, 1, 0.06819459, 0.015746519, 0.342091, 0.9370568, 0.06666667, 1, 0.059720196, 0.015665237, 0.33485198, 0.94024587, 0.1, 1, 0.042384177, 0.015448209, 0.31409693, 0.9483186, 0.13333334, 1, 0.020005621, 0.014977974, 0.27638465, 0.96072215, 0.16666667, 1, 0.00067758287, 0.014083002, 0.22136079, 0.9750901, 0.2, 1, -0.0072076805, 0.013138548, 0.1576771, 0.98737705, 0.23333333, 1, -0.009629542, 0.012538711, 0.11676635, 0.99303365, 0.25, 1, -0.009928887, 0.01229778, 0.1001419, 0.99484766)
-tracks/13/type = "rotation_3d"
-tracks/13/imported = true
-tracks/13/enabled = true
-tracks/13/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Hand.L")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = PackedFloat32Array(0, 1, 0.0056019025, 2.6368427e-08, -5.881354e-09, 0.9999843)
-tracks/14/type = "position_3d"
-tracks/14/imported = true
-tracks/14/enabled = true
-tracks/14/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Shoulder.R")
-tracks/14/interp = 0
-tracks/14/loop_wrap = true
-tracks/14/keys = PackedFloat32Array(0, 1, 4.7954716e-09, 0.21274588, 0.17013074)
-tracks/15/type = "rotation_3d"
-tracks/15/imported = true
-tracks/15/enabled = true
-tracks/15/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Shoulder.R")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = PackedFloat32Array(0, 1, 0.81380826, 0.3905363, -0.23114388, 0.36300138, 0.033333335, 1, 0.81380826, 0.3905363, -0.23114388, 0.36300138, 0.06666667, 1, 0.8036772, 0.4040578, -0.23632139, 0.36741334, 0.1, 1, 0.77701586, 0.43748313, -0.24884129, 0.37806475, 0.13333334, 1, 0.72781616, 0.49271655, -0.2689114, 0.3939553, 0.16666667, 1, 0.6506702, 0.5665397, -0.29452127, 0.4109967, 0.2, 1, 0.4990949, 0.68533266, -0.33287656, 0.4128156, 0.23333333, 1, 0.42324525, 0.72853196, -0.34585267, 0.4129051, 0.25, 1, 0.39974436, 0.7395575, -0.34912056, 0.41397336)
-tracks/16/type = "rotation_3d"
-tracks/16/imported = true
-tracks/16/enabled = true
-tracks/16/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Upper Arm.R")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = PackedFloat32Array(0, 1, -0.08324023, -0.050339032, -0.40041345, 0.9111565, 0.033333335, 1, -0.08324023, -0.050339032, -0.40041345, 0.9111565, 0.06666667, 1, -0.08782508, -0.050814237, -0.3958735, 0.9126823, 0.1, 1, -0.09640834, -0.051800277, -0.38185203, 0.9177207, 0.13333334, 1, -0.10467088, -0.05319904, -0.35186175, 0.9286588, 0.16666667, 1, -0.10445503, -0.05472614, -0.29759243, 0.94738215, 0.2, 1, -0.04882192, -0.057353146, -0.12867829, 0.98882204, 0.23333333, 1, -0.016732771, -0.057926904, -0.041022256, 0.99733734, 0.25, 1, -0.0048071872, -0.05799506, -0.011274999, 0.99824166)
-tracks/17/type = "rotation_3d"
-tracks/17/imported = true
-tracks/17/enabled = true
-tracks/17/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Lower Arm.R")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = PackedFloat32Array(0, 1, -0.0765972, -0.0174475, -0.22003183, 0.97232425, 0.033333335, 1, -0.0765972, -0.0174475, -0.22003183, 0.97232425, 0.06666667, 1, -0.0748402, -0.01762332, -0.20640646, 0.9754408, 0.1, 1, -0.06765381, -0.01794354, -0.17225903, 0.98256195, 0.13333334, 1, -0.051397417, -0.018271148, -0.11597932, 0.9917526, 0.16666667, 1, -0.022580152, -0.018371498, -0.041584924, 0.9987109, 0.2, 1, 0.005474939, -0.018323706, 0.012067277, 0.9997443, 0.23333333, 1, 0.0062843165, -0.018276714, 0.012672477, 0.9997329, 0.25, 1, 0.0021466843, -0.018258298, 0.0041318177, 0.99982244)
-tracks/18/type = "rotation_3d"
-tracks/18/imported = true
-tracks/18/enabled = true
-tracks/18/path = NodePath("Legless Samurai Test_Armature/Skeleton3D:Hand.R")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = PackedFloat32Array(0, 1, 0.0056019365, -2.3600576e-08, 1.0553541e-08, 0.9999843)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6vt1y"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eyw3n"]
 _data = {
-&"Aiming_Right Animation_Test": ExtResource("1_ybi1u"),
-&"Blocking Animation_Right": ExtResource("2_2ph7n"),
-&"Idle Animation Test": ExtResource("3_601p8"),
-&"Parry_Flash": SubResource("Animation_m0ky7"),
-&"Slicing Animation": ExtResource("4_3yx2r"),
-&"Stun Animation": ExtResource("5_stopx")
+&"Aiming_Right_Animation_Test": ExtResource("1_ybi1u"),
+&"Idle_Animation_Test": ExtResource("3_601p8")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uyxm2"]
-animation = &"Aiming_Right Animation_Test"
+animation = &"Anim_Manager/Aiming_Right_Animation_Test"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1hvmi"]
 animation = &"Blocking Animation_Right"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rhihh"]
-animation = &"Idle Animation Test"
+animation = &"Anim_Manager/Idle_Animation_Test"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ybi1u"]
 animation = &"Parry_Flash"
@@ -391,7 +247,6 @@ animation = &"Stun Animation"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uyxm2"]
 advance_mode = 2
 advance_condition = &"!is_aiming"
-advance_expression = "is_on_floor AND !is_aiming AND !is_blocking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1hvmi"]
 advance_mode = 2
@@ -399,48 +254,24 @@ advance_condition = &"is_aiming"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eyw3n"]
 advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ybi1u"]
-advance_mode = 2
-advance_condition = &"is_blocking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2ph7n"]
-advance_mode = 2
-advance_condition = &"!is_blocking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_601p8"]
-advance_mode = 2
-advance_condition = &"is_stunned"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rhihh"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c27ik"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gr1db"]
-advance_mode = 2
-advance_condition = &"is_parry_successful"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6u1y"]
-advance_mode = 2
+advance_condition = &"!is_aiming"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_rhihh"]
 states/Aiming_Animation_Right/node = SubResource("AnimationNodeAnimation_uyxm2")
-states/Aiming_Animation_Right/position = Vector2(597.6666, -8.666668)
+states/Aiming_Animation_Right/position = Vector2(597.22217, -8.666668)
 "states/Blocking Animation_Right /node" = SubResource("AnimationNodeAnimation_1hvmi")
 "states/Blocking Animation_Right /position" = Vector2(596.99994, 256.33334)
 states/End/position = Vector2(1002.6667, 91.333336)
 "states/Idle Animation Test/node" = SubResource("AnimationNodeAnimation_rhihh")
-"states/Idle Animation Test/position" = Vector2(411.66666, 105.333336)
+"states/Idle Animation Test/position" = Vector2(436.33334, 111.333336)
 states/Parry_Flash_Test/node = SubResource("AnimationNodeAnimation_ybi1u")
 states/Parry_Flash_Test/position = Vector2(644.70557, 141.67165)
 "states/Slicing Layer/node" = SubResource("AnimationNodeBlendTree_stopx")
 "states/Slicing Layer/position" = Vector2(855.03894, 192.68158)
 "states/Stun Animation/node" = SubResource("AnimationNodeAnimation_eyw3n")
 "states/Stun Animation/position" = Vector2(868.03894, 9.348248)
-transitions = ["Start", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_uyxm2"), "Idle Animation Test", "Aiming_Animation_Right", SubResource("AnimationNodeStateMachineTransition_1hvmi"), "Aiming_Animation_Right", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_eyw3n"), "Idle Animation Test", "Blocking Animation_Right ", SubResource("AnimationNodeStateMachineTransition_ybi1u"), "Blocking Animation_Right ", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_2ph7n"), "Aiming_Animation_Right", "Stun Animation", SubResource("AnimationNodeStateMachineTransition_601p8"), "Stun Animation", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_rhihh"), "Aiming_Animation_Right", "Slicing Layer", SubResource("AnimationNodeStateMachineTransition_c27ik"), "Blocking Animation_Right ", "Parry_Flash_Test", SubResource("AnimationNodeStateMachineTransition_gr1db"), "Slicing Layer", "End", SubResource("AnimationNodeStateMachineTransition_b6u1y")]
-graph_offset = Vector2(197.35776, -27.87426)
+transitions = ["Start", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_uyxm2"), "Idle Animation Test", "Aiming_Animation_Right", SubResource("AnimationNodeStateMachineTransition_1hvmi"), "Aiming_Animation_Right", "Idle Animation Test", SubResource("AnimationNodeStateMachineTransition_eyw3n")]
+graph_offset = Vector2(117.35779, -24.874268)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2ph7n"]
 radius = 0.2607422
@@ -453,6 +284,14 @@ script = ExtResource("1_601p8")
 target_position = Vector3(0, 0, -1)
 collision_mask = 3
 debug_shape_custom_color = Color(0.45788574, 0.5644618, 1, 1)
+
+[node name="Aim_Target" type="Node3D" parent="." unique_id=459622207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -0.0073412657)
+
+[node name="AimDebugMarker" type="Marker3D" parent="." unique_id=1520460757]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AimDebugMarker" unique_id=339225269]
+radius = 0.08
 
 [node name="Indication Sphere Test" type="MeshInstance3D" parent="." unique_id=972017421]
 transform = Transform3D(0.90411174, -0.42378467, -0.054667458, -0.042540148, 0.038031876, -0.9983706, 0.42517328, 0.90496415, 0.016357243, 0.08059518, 0.50567275, 0.21288978)
@@ -569,22 +408,56 @@ mesh = SubResource("ArrayMesh_410ef")
 skin = SubResource("Skin_vvo3c")
 skeleton = NodePath("..")
 
+[node name="LookAtModifier3D" type="LookAtModifier3D" parent="Legless Samurai Test_Armature/Skeleton3D" unique_id=1476011160]
+transform = Transform3D(0.8797316, 0.4754707, 0, -0.4754707, 0.8797316, 0, 0, 0, 1, 0, 0, 0)
+influence = 0.5
+target_node = NodePath("../../../Aim_Target")
+bone_name = "Upper Torso"
+bone = 3
+
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Legless Samurai Test_Armature/Skeleton3D" unique_id=1812903990]
-transform = Transform3D(3.8668546e-07, -0.80717015, 0.59031874, 2.8775366e-07, -0.5903187, -0.8071704, 1, 4.8198723e-07, 3.9985935e-09, -0.9475623, 0.015861914, 5.943824e-07)
+transform = Transform3D(-0.006478575, -0.81298536, 0.5822481, -0.002439523, -0.58224547, -0.8130095, 0.9999759, -0.006687548, 0.0017888247, -0.99856687, 0.0010417253, -0.007329623)
 bone_name = "Hand.R"
 bone_idx = 13
 
 [node name="Sword_Test" parent="Legless Samurai Test_Armature/Skeleton3D/BoneAttachment3D" unique_id=1047255989 instance=ExtResource("1_2ph7n")]
-transform = Transform3D(-0.5874647, 0.38513538, -0.71172893, -0.7662441, -0.5476205, 0.33613038, -0.26030165, 0.74282163, 0.6168158, 0.021384701, 0.06703904, -0.00903663)
+transform = Transform3D(-0.0328302, 0.9822106, -0.18489526, -0.98466563, -7.1617775e-05, 0.17445809, 0.17134103, 0.18778713, 0.96715146, 0, 0, 0)
 
 [node name="ModifierBoneTarget3D" type="ModifierBoneTarget3D" parent="Legless Samurai Test_Armature/Skeleton3D" unique_id=833251395]
-transform = Transform3D(3.8668546e-07, -0.80717015, 0.59031874, 2.8775366e-07, -0.5903187, -0.8071704, 1, 4.8198723e-07, 3.9985935e-09, -0.9475623, 0.015861914, 5.943824e-07)
+transform = Transform3D(-0.0036536546, -0.68645793, 0.7271601, 0.00027967247, -0.7271657, -0.68646204, 0.9999932, -0.002304728, 0.002848796, -0.8619775, -0.1499291, -0.002995471)
 bone_name = "Hand.R"
 bone = 13
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1888604791]
-libraries/ = SubResource("AnimationLibrary_6vt1y")
-autoplay = &"Idle Animation Test"
+[node name="TwoBoneIK3D" type="TwoBoneIK3D" parent="Legless Samurai Test_Armature/Skeleton3D" unique_id=17816888]
+setting_count = 2
+settings/0/target_node = NodePath("../../../Aim_Target")
+settings/0/pole_node = NodePath("../../../Aim_Target")
+settings/0/root_bone_name = "Shoulder.R"
+settings/0/root_bone = 10
+settings/0/middle_bone_name = "Upper Arm.R"
+settings/0/middle_bone = 11
+settings/0/pole_direction = 0
+settings/0/end_bone_name = "Hand.R"
+settings/0/end_bone = 13
+settings/0/use_virtual_end = false
+settings/0/extend_end_bone = false
+settings/1/target_node = NodePath("../../../Aim_Target")
+settings/1/pole_node = NodePath("../../../Aim_Target")
+settings/1/root_bone_name = "Shoulder.L"
+settings/1/root_bone = 6
+settings/1/middle_bone_name = "Upper Arm.L"
+settings/1/middle_bone = 7
+settings/1/pole_direction = 0
+settings/1/end_bone_name = "Hand.L"
+settings/1/end_bone = 9
+settings/1/use_virtual_end = false
+settings/1/extend_end_bone = true
+settings/1/end_bone/direction = 0
+settings/1/end_bone/length = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1741370020]
+libraries/Anim_Manager = SubResource("AnimationLibrary_eyw3n")
+autoplay = &"Anim_Manager/Idle_Animation_Test"
 
 [node name="AnimationTree_Legless_Samurai" type="AnimationTree" parent="." unique_id=931430183]
 tree_root = SubResource("AnimationNodeStateMachine_rhihh")
@@ -602,8 +475,3 @@ parameters/conditions/is_stunned = false
 [node name="LS_Collision_Shape" type="CollisionShape3D" parent="." unique_id=2122957744]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_2ph7n")
-
-[node name="AimDebugMarker" type="Marker3D" parent="." unique_id=1520460757]
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="AimDebugMarker" unique_id=339225269]
-radius = 0.08
