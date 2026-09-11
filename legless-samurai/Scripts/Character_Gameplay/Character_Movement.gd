@@ -22,6 +22,7 @@ const AIM_FLIP_DEAD_ZONE:= 0.05
 @export var aim_debug_marker: Marker3D
 
 #@onready var Bone_Target: ModifierBoneTarget3D = $"Legless Samurai Test_Armature/Skeleton3D/ModifierBoneTarget3D"
+@onready var ik_target: Node3D = $"Legless Samurai Test_Armature/Skeleton3D/IK_Target"
 @onready var look_at_modifier: LookAtModifier3D = ($"Legless Samurai Test_Armature/Skeleton3D/LookAtModifier3D")
 @onready var arm_ik: TwoBoneIK3D = ($"Legless Samurai Test_Armature/Skeleton3D/TwoBoneIK3D")
 
@@ -94,6 +95,7 @@ func _check_aim_direction() -> void:
 
 func _flip_facing() -> void:
 	facing_direction *= -1
+	print(global_transform.origin.x)
 	rotation.y += PI
 	
 
@@ -108,13 +110,13 @@ func _handle_parrying():
 func _handle_stunned():
 	print("stunned")
 
-func _update_aim_target():
+func _update_aim_target() -> void:
 	
 	var camera := get_viewport().get_camera_3d()
 	
 	if camera == null:
 		return
-		
+	
 	
 	var mouse_position := get_viewport().get_mouse_position()
 	
@@ -130,6 +132,7 @@ func _update_aim_target():
 	
 	aim_target.global_position = aim_target_position
 	aim_debug_marker.global_position = aim_target_position
+	ik_target.global_position = aim_target_position
 	
 	aim_direction = (
 		aim_target_position - global_position

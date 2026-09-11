@@ -14,10 +14,17 @@ config/name="Legless Samurai"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+CyclopsAutoLoad="*uid://4siqre3jhe80"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
-"res://Addons/": "purple",
 "res://Assets/": "yellow",
 "res://Scenes/": "green",
 "res://Scripts/": "red"
