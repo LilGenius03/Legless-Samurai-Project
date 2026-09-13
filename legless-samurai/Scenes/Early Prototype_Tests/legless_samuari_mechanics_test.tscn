@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dg7hhrx48j2u3" path="res://Scenes/Early Prototype_Tests/legless_samurai_test.tscn" id="1_c5do3"]
 [ext_resource type="PackedScene" uid="uid://c778tcssxtkm3" path="res://Scenes/Early Prototype_Tests/aim_debug_marker_test.tscn" id="1_dxvq0"]
+[ext_resource type="Script" uid="uid://qdx14f7ckp48" path="res://Scripts/Character_Gameplay/Legless_Samuari_Camera_Movement.gd" id="1_fqxi8"]
 [ext_resource type="PackedScene" uid="uid://beln3xnqgvdse" path="res://Scenes/Early Prototype_Tests/aim_target_test.tscn" id="1_yfcfy"]
+[ext_resource type="PackedScene" uid="uid://bxwn5u7g3f76y" path="res://Scenes/Early Prototype_Tests/slice_point.tscn" id="4_c5do3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kp1a8"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,40 +19,14 @@ sky = SubResource("Sky_yfcfy")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="GDScript" id="GDScript_dxvq0"]
-resource_name = "CameraFollow"
-script/source = "extends Camera3D
-@export var player_target: NodePath
-@export var offset = Vector3(-6.0, 0.5, 0.0)
-@export var smooth_speed = 5.0
-
-var _fixed_rotation: Vector3
-
-func _ready():
-	_fixed_rotation = rotation
-
-func _process(delta):
-	if player_target.is_empty():
-		return
-
-	var target: Node3D = get_node(player_target)
-	if target == null:
-		return
-
-	var fixed_x = 0.0
-	var target_pos = Vector3(fixed_x, target.global_position.y, target.global_position.z)
-
-	var desired_position = target_pos + offset
-
-	global_position = global_position.lerp(desired_position, smooth_speed * delta)
-
-	global_rotation = _fixed_rotation
-"
-
 [sub_resource type="BoxMesh" id="BoxMesh_1s358"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_on5w7"]
 size = Vector3(1, 1.0006104, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c5do3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fqxi8"]
 
 [node name="Legless Samuari Mechanics_Test" type="Node3D" unique_id=513799604]
 
@@ -63,7 +39,7 @@ shadow_enabled = true
 
 [node name="LS_Camera3D" type="Camera3D" parent="." unique_id=1052915819]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 0.50023484, -2.1855693e-07)
-script = SubResource("GDScript_dxvq0")
+script = ExtResource("1_fqxi8")
 player_target = NodePath("../Legless Samurai_Test")
 smooth_speed = 10.0
 
@@ -72,14 +48,14 @@ aim_target = NodePath("../Aim_Target")
 aim_debug_marker = NodePath("../AimDebugMarker")
 
 [node name="Ground_Test" type="MeshInstance3D" parent="." unique_id=1064597318]
-transform = Transform3D(3.2308648, 0, 0, 0, 1, 0, 0, 0, 7.6260233, 0, -0.5, 3)
+transform = Transform3D(3.231, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 3)
 mesh = SubResource("BoxMesh_1s358")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground_Test" unique_id=923872467]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24958205, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground_Test/StaticBody3D" unique_id=1760365804]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2498169, 0)
+transform = Transform3D(0.9999998, 0, 0, 0, 0.99999774, 0, 0, 0, 0.99999934, 0, 0.24981686, 0)
 shape = SubResource("BoxShape3D_on5w7")
 
 [node name="Aim_Target" parent="." unique_id=1956041917 instance=ExtResource("1_yfcfy")]
@@ -89,15 +65,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.37395847, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.37395847, 0)
 
 [node name="Prototype_Level_layout" type="Node3D" parent="." unique_id=1660588946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="Platform" type="CSGBox3D" parent="Prototype_Level_layout" unique_id=207303410]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2497559, 3.9923449)
-size = Vector3(3, 0.5004883, 2)
+[node name="SlicePoint" parent="Prototype_Level_layout" unique_id=1448570458 instance=ExtResource("4_c5do3")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 3, 0)
 
-[node name="Platform2" type="CSGBox3D" parent="Prototype_Level_layout" unique_id=344143233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.2497559, -0.0076551437)
-size = Vector3(3, 0.5004883, 2)
+[node name="Platform_1" type="StaticBody3D" parent="Prototype_Level_layout" unique_id=1232961292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 4, 4)
 
-[node name="Platform3" type="CSGBox3D" parent="Prototype_Level_layout" unique_id=1608480141]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.249756, 4.992345)
-size = Vector3(3, 0.5004883, 2)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype_Level_layout/Platform_1" unique_id=992349311]
+mesh = SubResource("BoxMesh_c5do3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype_Level_layout/Platform_1" unique_id=416678348]
+shape = SubResource("BoxShape3D_fqxi8")
+
+[node name="Platform_2" type="StaticBody3D" parent="Prototype_Level_layout" unique_id=86581080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 11, -7)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype_Level_layout/Platform_2" unique_id=1551474884]
+mesh = SubResource("BoxMesh_c5do3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype_Level_layout/Platform_2" unique_id=1077463085]
+shape = SubResource("BoxShape3D_fqxi8")
+
+[connection signal="body_entered" from="Prototype_Level_layout/SlicePoint" to="Legless Samurai_Test" method="_on_slice_point_body_entered"]

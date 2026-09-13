@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bxwn5u7g3f76y"]
+
+[ext_resource type="Script" uid="uid://wgh8l0vqr2xo" path="res://Scripts/Character_Gameplay/slice_point.gd" id="1_t6vou"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_u4fqg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t6vou"]
+albedo_color = Color(0.9469982, 0, 0.5495136, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8xfil"]
+material = SubResource("StandardMaterial3D_t6vou")
+
+[node name="SlicePoint" type="Area3D" unique_id=1448570458]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+script = ExtResource("1_t6vou")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1816974366]
+shape = SubResource("SphereShape3D_u4fqg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D" unique_id=830834598]
+mesh = SubResource("SphereMesh_8xfil")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

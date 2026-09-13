@@ -2,7 +2,8 @@ extends CharacterBody3D
 
 enum State {
 IDLE, 
-AIMING, 
+AIMING,
+LAUNCHING, 
 BLOCKING, 
 PARRYING, 
 STUNNED
@@ -15,8 +16,18 @@ var facing_direction := 1
 
 const AIM_FLIP_DEAD_ZONE:= 0.05
 
+var launch_direction: Vector3 = Vector3.ZERO
+var launch_speed: float = 0.0
+
+@export var max_pull_distance := 5.0
+@export var max_launch_speed := 20.0
+@export var gravity := 25.0
+
 @onready var animation_tree = $AnimationTree_Legless_Samurai
 @onready var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+
+@onready var aim_visual: Node3D = $Aim_Visual
+@onready var aim_cylinder: MeshInstance3D = $Aim_Visual/Aim_Cylinder
 
 @export var aim_target: Node3D
 @export var aim_debug_marker: Marker3D
@@ -38,7 +49,10 @@ func _physics_process(_delta: float) -> void:
 			_handle_idle()
 
 		State.AIMING:
-			_handle_aiming()
+			_handle_aiming(_delta)
+
+		State.LAUNCHING:
+			_handle_launching(_delta)
 
 		State.BLOCKING:
 			_handle_blocking()
@@ -55,18 +69,22 @@ func _handle_idle() -> void:
 		_enter_aiming()
 	pass
 
-func _handle_aiming() -> void:
+func _handle_aiming(delta: float) -> void:
 	if not Input.is_action_pressed("Aiming"):
-		_exit_aiming()
+		_launch_samurai()
 		return
 	
 	_update_aim_target()
 	_check_aim_direction()
+	
+	if not is_on_floor():
+		velocity.y -= gravity * delta
+		move_and_slide()
 	pass
 
 func _enter_aiming() -> void:
 	current_state = State.AIMING
-	
+	aim_visual.visible = true
 	look_at_modifier.influence = 1.0
 	arm_ik.influence = 1.0
 	state_machine.travel("Aiming_Animation_Right")
@@ -99,10 +117,44 @@ func _flip_facing() -> void:
 	rotation.y += PI
 	
 
+func _handle_launching(delta: float) -> void:
+	velocity.y -= gravity * delta
+	
+	move_and_slide()
+	
+	if is_on_floor() and velocity.y <= 0.0:
+		velocity = Vector3.ZERO
+		current_state = State.IDLE
+
 func _handle_blocking():
 	if Input.is_action_pressed("Blocking"):
 		print("blocking")
 	
+
+func _get_pull_strength() -> float:
+	var pull_distance := global_position.distance_to(aim_target_position)
+	var pull_strength := pull_distance / max_pull_distance
+	
+	return clamp(pull_strength, 0.0, 1.0)
+	
+
+func _launch_samurai() -> void:
+	current_state = State.LAUNCHING
+	aim_visual.visible = false
+	var pull_strength := _get_pull_strength()
+	
+	#The mouse direction is the direction we pulled.
+	#Launch the opposite direction we pulled.
+	launch_direction = -aim_direction
+	
+	#keep it 2.5D.
+	launch_direction.x = 0.0
+	launch_direction = launch_direction.normalized()
+	
+	launch_speed = max_launch_speed * pull_strength
+	velocity = launch_direction * launch_speed
+	
+
 
 func _handle_parrying():
 	print("parrying")
@@ -137,9 +189,37 @@ func _update_aim_target() -> void:
 	aim_direction = (
 		aim_target_position - global_position
 	).normalized()
-
 	
-	#Bone_Target.global_position = (
-		#global_position
-		#+ aim_direction * 2.0
-	#)
+	_update_aim_visual()
+
+func _update_aim_visual() -> void:
+	var start_position := global_position
+	var end_position := aim_target_position
+	
+	var direction := end_position - start_position
+	var distance := direction.length()
+	
+	if distance <= 0.01:
+		aim_visual.visible = false
+		return
+	
+	aim_visual.visible = true
+	
+	#Visual halfway between the Samurai and the Aim Target
+	aim_visual.global_position = ( start_position + end_position) / 2.0
+	
+	#Point aim visual towards the Aim Target.
+	aim_visual.look_at(end_position, Vector3.UP)
+	
+	aim_cylinder.scale = Vector3(0.03, distance, 0.03)
+
+func slice_point_hit(slice_point: Area3D) -> void:
+	print("SLICE POINT HIT")
+	velocity = Vector3.ZERO
+	current_state = State.AIMING
+	
+	look_at_modifier.influence = 1.0
+	arm_ik.influence = 1.0
+	
+	state_machine.travel("Aiming_Animation_Right")
+	aim_visual.visible = true
