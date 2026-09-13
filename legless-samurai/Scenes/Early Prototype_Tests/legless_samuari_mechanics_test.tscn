@@ -70,8 +70,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 [node name="SlicePoint" parent="Prototype_Level_layout" unique_id=1448570458 instance=ExtResource("4_c5do3")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 3, 0)
 
+[node name="SlicePoint2" parent="Prototype_Level_layout" unique_id=1230043091 instance=ExtResource("4_c5do3")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 8, 2)
+
 [node name="Platform_1" type="StaticBody3D" parent="Prototype_Level_layout" unique_id=1232961292]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 4, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 4, 8)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype_Level_layout/Platform_1" unique_id=992349311]
 mesh = SubResource("BoxMesh_c5do3")
@@ -80,7 +83,7 @@ mesh = SubResource("BoxMesh_c5do3")
 shape = SubResource("BoxShape3D_fqxi8")
 
 [node name="Platform_2" type="StaticBody3D" parent="Prototype_Level_layout" unique_id=86581080]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 11, -7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 9, -7)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype_Level_layout/Platform_2" unique_id=1551474884]
 mesh = SubResource("BoxMesh_c5do3")
@@ -89,3 +92,4 @@ mesh = SubResource("BoxMesh_c5do3")
 shape = SubResource("BoxShape3D_fqxi8")
 
 [connection signal="body_entered" from="Prototype_Level_layout/SlicePoint" to="Legless Samurai_Test" method="_on_slice_point_body_entered"]
+[connection signal="body_entered" from="Prototype_Level_layout/SlicePoint2" to="Legless Samurai_Test" method="_on_slice_point_body_entered"]
