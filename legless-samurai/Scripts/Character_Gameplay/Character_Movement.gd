@@ -3,7 +3,8 @@ extends CharacterBody3D
 enum State {
 IDLE, 
 AIMING,
-LAUNCHING, 
+LAUNCHING,
+WAITING_FOR_SLICE,
 BLOCKING, 
 PARRYING, 
 STUNNED
@@ -19,9 +20,15 @@ const AIM_FLIP_DEAD_ZONE:= 0.05
 var launch_direction: Vector3 = Vector3.ZERO
 var launch_speed: float = 0.0
 
+var slice_window_timer := 0.0
+var saved_velocity: Vector3 = Vector3.ZERO
+
 @export var max_pull_distance := 5.0
 @export var max_launch_speed := 20.0
 @export var gravity := 25.0
+
+@export var slice_window_duration := 0.5
+@export var slice_slowdown := 0.5
 
 @onready var animation_tree = $AnimationTree_Legless_Samurai
 @onready var state_machine: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
@@ -53,6 +60,9 @@ func _physics_process(_delta: float) -> void:
 
 		State.LAUNCHING:
 			_handle_launching(_delta)
+	
+		State.WAITING_FOR_SLICE:
+			_handle_waiting_for_slice(_delta)
 
 		State.BLOCKING:
 			_handle_blocking()
@@ -76,6 +86,7 @@ func _handle_aiming(delta: float) -> void:
 	
 	_update_aim_target()
 	_check_aim_direction()
+	_update_ik_target()
 	
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -85,11 +96,17 @@ func _handle_aiming(delta: float) -> void:
 func _enter_aiming() -> void:
 	current_state = State.AIMING
 	aim_visual.visible = true
-	look_at_modifier.influence = 1.0
+	look_at_modifier.influence = 0.0
 	arm_ik.influence = 1.0
 	state_machine.travel("Aiming_Animation_Right")
-	#var condition_active = animation_tree.get("parameters/conditions/is_aiming")
-	#print("Condition 'is_aiming' is: ", condition_active)
+	
+	#This will be the code for the real character model
+	
+	#if facing_direction == 1:
+		#state_machine.travel("Aiming_Animation_Right")
+	#else:
+		#state_machine.travel("Aiming_Animation_Right")
+
 
 func _exit_aiming() -> void:
 	current_state = State.IDLE
@@ -117,6 +134,24 @@ func _flip_facing() -> void:
 	rotation.y += PI
 	
 
+func _update_ik_target() -> void:
+	
+	# aim_direction points from the Samurai toward the mouse.
+	# We want the IK to point in the opposite direction.
+	var launch_aim_direction := -aim_direction
+	
+	# Keep aiming on the Y/Z gameplay plane.
+	launch_aim_direction.x = 0.0
+	
+	if launch_aim_direction.length() <= 0.01:
+		return
+	
+	launch_aim_direction = launch_aim_direction.normalized()
+	
+	# Place the IK target in front of the Samurai
+	# in the direction he is going to launch.
+	ik_target.global_position = (global_position + launch_aim_direction * 2.0)
+
 func _handle_launching(delta: float) -> void:
 	velocity.y -= gravity * delta
 	
@@ -125,10 +160,32 @@ func _handle_launching(delta: float) -> void:
 	if is_on_floor() and velocity.y <= 0.0:
 		velocity = Vector3.ZERO
 		current_state = State.IDLE
+		
+
+func _handle_waiting_for_slice(delta: float) -> void:
+	# Count down the slice opportunity.
+	slice_window_timer -= delta
+
+	# Continue moving at reduced speed.
+	velocity = saved_velocity * slice_slowdown
+
+	# Gravity still applies.
+	velocity.y -= gravity * delta
+
+	move_and_slide()
+
+	if Input.is_action_pressed("Aiming"):
+		_enter_aiming()
+		return
+
+	if slice_window_timer <= 0.0:
+		velocity = saved_velocity
+		current_state = State.LAUNCHING
 
 func _handle_blocking():
 	if Input.is_action_pressed("Blocking"):
 		print("blocking")
+		
 	
 
 func _get_pull_strength() -> float:
@@ -184,7 +241,6 @@ func _update_aim_target() -> void:
 	
 	aim_target.global_position = aim_target_position
 	aim_debug_marker.global_position = aim_target_position
-	ik_target.global_position = aim_target_position
 	
 	aim_direction = (
 		aim_target_position - global_position
@@ -213,13 +269,15 @@ func _update_aim_visual() -> void:
 	
 	aim_cylinder.scale = Vector3(0.03, distance, 0.03)
 
-func slice_point_hit(slice_point: Area3D) -> void:
+func slice_point_hit(_slice_point: Area3D) -> void:
 	print("SLICE POINT HIT")
-	velocity = Vector3.ZERO
-	current_state = State.AIMING
+	current_state = State.WAITING_FOR_SLICE
 	
-	look_at_modifier.influence = 1.0
-	arm_ik.influence = 1.0
+	slice_window_timer = slice_window_duration
 	
-	state_machine.travel("Aiming_Animation_Right")
-	aim_visual.visible = true
+	saved_velocity = velocity
+	
+	look_at_modifier.influence = 0.0
+	arm_ik.influence = 0.0
+	
+	aim_visual.visible = false
