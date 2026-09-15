@@ -20,7 +20,7 @@ CyclopsAutoLoad="*uid://4siqre3jhe80"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 
@@ -29,6 +29,11 @@ folder_colors={
 "res://Scenes/": "green",
 "res://Scripts/": "red"
 }
+
+[global_group]
+
+sword_hitbox="Areas the sword can hit"
+LS_Samurai="Legless Samurai Collision"
 
 [input]
 

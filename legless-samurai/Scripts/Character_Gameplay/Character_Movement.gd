@@ -4,7 +4,6 @@ enum State {
 IDLE, 
 AIMING,
 LAUNCHING,
-WAITING_FOR_SLICE,
 BLOCKING, 
 PARRYING, 
 STUNNED
@@ -23,6 +22,8 @@ var launch_speed: float = 0.0
 
 var slice_window_timer := 0.0
 var saved_velocity: Vector3 = Vector3.ZERO
+
+var can_midair_slice := false
 
 @export var max_pull_distance := 5.0
 @export var max_launch_speed := 20.0
@@ -64,8 +65,6 @@ func _physics_process(_delta: float) -> void:
 		State.LAUNCHING:
 			_handle_launching(_delta)
 	
-		State.WAITING_FOR_SLICE:
-			_handle_waiting_for_slice(_delta)
 
 		State.BLOCKING:
 			_handle_blocking()
@@ -159,34 +158,29 @@ func _update_ik_target() -> void:
 	ik_target.global_position = (global_position + launch_aim_direction * 2.0)
 
 func _handle_launching(delta: float) -> void:
+	
+	if slice_window_timer > 0.0:
+		slice_window_timer -= delta
+		var slowed_velocity := launch_direction * launch_speed * slice_slowdown
+		
+		velocity.z = slowed_velocity.z
+	
+	else:
+		velocity.z = launch_direction.z * launch_speed
+	
 	velocity.y -= gravity * delta
 	
 	move_and_slide()
+	
+	if can_midair_slice and Input.is_action_pressed("Aiming"):
+		_enter_aiming()
+		return
 	
 	if is_on_floor() and velocity.y <= 0.0:
 		velocity = Vector3.ZERO
+		can_midair_slice = false
 		current_state = State.IDLE
-		
-
-func _handle_waiting_for_slice(delta: float) -> void:
-	# Count down the slice opportunity.
-	slice_window_timer -= delta
-
-	# Continue moving at reduced speed.
-	velocity = saved_velocity * slice_slowdown
-
-	# Gravity still applies.
-	velocity.y -= gravity * delta
-
-	move_and_slide()
-
-	if Input.is_action_pressed("Aiming"):
-		_enter_aiming()
-		return
-
-	if slice_window_timer <= 0.0:
-		velocity = saved_velocity
-		current_state = State.LAUNCHING
+	
 
 func _handle_blocking():
 	if Input.is_action_pressed("Blocking"):
@@ -204,6 +198,9 @@ func _get_pull_strength() -> float:
 func _launch_samurai() -> void:
 	current_state = State.LAUNCHING
 	aim_visual.visible = false
+	
+	can_midair_slice = false
+	
 	var pull_strength := _get_pull_strength()
 	
 	#The mouse direction is the direction we pulled.
@@ -276,14 +273,10 @@ func _update_aim_visual() -> void:
 	aim_cylinder.scale = Vector3(0.03, distance, 0.03)
 
 func slice_point_hit(_slice_point: Area3D) -> void:
-	print("SLICE POINT HIT")
-	current_state = State.WAITING_FOR_SLICE
+	print("SAMURAI RECEIVED SLICE POINT")
+	
+	can_midair_slice = true
 	
 	slice_window_timer = slice_window_duration
 	
 	saved_velocity = velocity
-	
-	look_at_modifier.influence = 0.0
-	arm_ik.influence = 0.0
-	
-	aim_visual.visible = false

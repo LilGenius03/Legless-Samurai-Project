@@ -12,12 +12,14 @@ material = SubResource("StandardMaterial3D_t6vou")
 
 [node name="SlicePoint" type="Area3D" unique_id=1448570458]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+collision_layer = 2
 script = ExtResource("1_t6vou")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1816974366]
+transform = Transform3D(1.855, 0, 0, 0, 1.855, 0, 0, 0, 1.855, 0, 0, 0)
 shape = SubResource("SphereShape3D_u4fqg")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=830834598]
 mesh = SubResource("SphereMesh_8xfil")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
