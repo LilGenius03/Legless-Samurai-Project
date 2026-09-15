@@ -16,6 +16,7 @@ var aim_target_position: Vector3 = Vector3.ZERO
 var facing_direction := 1
 
 const AIM_FLIP_DEAD_ZONE:= 0.05
+var original_visual_rotation_y := 0.0
 
 var launch_direction: Vector3 = Vector3.ZERO
 var launch_speed: float = 0.0
@@ -43,11 +44,13 @@ var saved_velocity: Vector3 = Vector3.ZERO
 @onready var ik_target: Node3D = $"Legless Samurai Test_Armature/Skeleton3D/IK_Target"
 @onready var look_at_modifier: LookAtModifier3D = ($"Legless Samurai Test_Armature/Skeleton3D/LookAtModifier3D")
 @onready var arm_ik: TwoBoneIK3D = ($"Legless Samurai Test_Armature/Skeleton3D/TwoBoneIK3D")
+@onready var visual_root: Node3D = $"Legless Samurai Test_Armature/Skeleton3D"
 
 func _ready() -> void:
 	animation_tree.active = true
 	state_machine.travel("Idle Animation Test")
-	#state_machine.travel("Aiming_Animation_Right")
+	original_visual_rotation_y = visual_root.rotation.y
+
 
 func _physics_process(_delta: float) -> void:
 	
@@ -130,8 +133,11 @@ func _check_aim_direction() -> void:
 
 func _flip_facing() -> void:
 	facing_direction *= -1
-	print(global_transform.origin.x)
-	rotation.y += PI
+
+	if facing_direction == 1:
+		visual_root.rotation.y = original_visual_rotation_y
+	else:
+		visual_root.rotation.y = original_visual_rotation_y + PI
 	
 
 func _update_ik_target() -> void:

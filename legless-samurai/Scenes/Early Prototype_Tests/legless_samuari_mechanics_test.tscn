@@ -30,6 +30,10 @@ size = Vector3(1, 1.0006104, 1)
 
 [node name="Legless Samuari Mechanics_Test" type="Node3D" unique_id=513799604]
 
+[node name="Legless Samurai_Test" parent="." unique_id=1914336409 node_paths=PackedStringArray("aim_target", "aim_debug_marker") instance=ExtResource("1_c5do3")]
+aim_target = NodePath("../Aim_Target")
+aim_debug_marker = NodePath("../AimDebugMarker")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=561646846]
 environment = SubResource("Environment_dxvq0")
 
@@ -42,10 +46,6 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 
 script = ExtResource("1_fqxi8")
 player_target = NodePath("../Legless Samurai_Test")
 smooth_speed = 10.0
-
-[node name="Legless Samurai_Test" parent="." unique_id=1914336409 node_paths=PackedStringArray("aim_target", "aim_debug_marker") instance=ExtResource("1_c5do3")]
-aim_target = NodePath("../Aim_Target")
-aim_debug_marker = NodePath("../AimDebugMarker")
 
 [node name="Ground_Test" type="MeshInstance3D" parent="." unique_id=1064597318]
 transform = Transform3D(3.231, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.5, 3)
